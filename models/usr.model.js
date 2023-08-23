@@ -14,8 +14,11 @@ const USRSchema = Schema({
     xstats: {    
         type:Boolean,
         default:true
+    },
+    xrol::
+        {    
+        type:String
     }
-    
 
 });
 //ofuscate
