@@ -2,16 +2,16 @@ const {Schema, model } = require('mongoose');
 
 const USRSchema = Schema({
 
-    tzxusr: {
+    xusr: {
         type:String,
         required:[true,'Se Requiere de un Usuario'],
         unique: true
     },
-    tzxpass: {
+    xpass: {
         type:String,
         required:[true,'Se Requiere de una Contraseña']
     },
-    tzxstats: {      //      (Opcional)
+    xstats: {    
         type:Boolean,
         default:true
     }
@@ -20,7 +20,7 @@ const USRSchema = Schema({
 });
 //ofuscate
 USRSchema.methods.toJSON = function (){
-    const {__v,tzxpass,...usr} = this.toObject();
+    const {__v,xpass,...usr} = this.toObject();
     return usr
 }
 
