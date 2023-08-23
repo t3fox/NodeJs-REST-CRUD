@@ -6,14 +6,14 @@ const XUSR = require('../models/usr.model');
 const UsrGet = async (req = request,res = response) =>{
     // const {q,nombre = "no name",apikey} = req.query;
     const {limite = 5,desde = 0} = req.query;
-    const query = { tzxstats:true }
+    const query = { xstats:true }
 
     // const usr = await XUSR.find(query)
     //     .limit(Number(limite))
     //     .skip(Number(desde));
     // const total = await XUSR.countDocuments(query);
 
-    const [total,usrs] = await Promise.all([  //ejecuta en simultaneo ambas promesas
+    const [total,usrs] = await Promise.all([ 
         XUSR.countDocuments(query),
         XUSR.find(query)
         .limit(Number(limite))
@@ -28,10 +28,10 @@ const UsrGet = async (req = request,res = response) =>{
 
 const UsrPut = async (req, res = response) =>{
     const { usrid } = req.params;
-    const { _id,tzxusr,tzxpass, ...resto } = req.body;
+    const { _id,xusr,xpass, ...resto } = req.body;
 
-    if(tzxusr){
-        resto.tzxpass =  hash.sha512().update(tzxpass).digest('hex');
+    if(xusr){
+        resto.xpass =  hash.sha512().update(xpass).digest('hex');
         const usr = await XUSR.findByIdAndUpdate(usrid,resto);
         res.json(usr);
     }
@@ -39,11 +39,11 @@ const UsrPut = async (req, res = response) =>{
 }
 
 const UsrPost = async (req = request,res = response) =>{
-    const {tzxusr,tzxpass,tzxrol,tzxstats} = req.body;
-    const USR = new XUSR({tzxusr,tzxpass,tzxrol,tzxstats});
+    const {xusr,xpass,xrol,xstats} = req.body;
+    const USR = new XUSR({xusr,xpass,xrol,xstats});
 
 
-    USR.tzxpass =  hash.sha512().update(tzxpass).digest('hex');
+    USR.xpass =  hash.sha512().update(xpass).digest('hex');
 
     //DATA SAVE (change to GET METHOD) / Pd: commit next line
     await USR.save();
@@ -51,14 +51,14 @@ const UsrPost = async (req = request,res = response) =>{
         mundo: 'POST / Hola mundo',
         USR
     });
-    console.log("CRIPT:",USR.tzxpass);
+    console.log("CRIPT:",USR.xpass);
 }
 
 const UsrDelete = async (req,res = response) =>{
     const { usrid } = req.params;
-    //del fisicamente
+    
     // const usrphys = await XUSR.findByIdAndDelete(usrid);
-    const usrmv = await XUSR.findByIdAndUpdate(usrid,{tzxstats:false});
+    const usrmv = await XUSR.findByIdAndUpdate(usrid,{xstats:false});
 
     res.json(usrmv);
 
