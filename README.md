@@ -2,4 +2,5 @@
 Simple CRUD usando MongoDB 
 
 **Notes**
-change option to (firestore)
+
+- Change option to (firestore)
