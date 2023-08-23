@@ -1,5 +1,2 @@
 # NodeJs-REST-CRUD
-CRUD con MONGODB y mongoose
-
-
-Cambiar Comentarios Default
+CRUD usando MONGODB 
