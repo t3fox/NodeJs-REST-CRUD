@@ -1,2 +1,2 @@
 # NodeJs-REST-CRUD
-CRUD usando MONGODB 
+Simple CRUD usando MongoDB 
